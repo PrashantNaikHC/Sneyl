@@ -11,6 +11,8 @@ import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +73,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.help_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.help:
+                ToastMessage(getString(R.string.instructions));
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        handler.removeCallbacks(runnableCode);
+        super.onPause();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -111,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void ToastMessage(String s) {
-        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
     }
 
     SensorEventListener proximitySensorEventListener
@@ -123,9 +146,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onSensorChanged(SensorEvent event) {
 
-            mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-            mMediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.sneyl_audio);
-            mMediaPlayer.setOnCompletionListener(mCompletionListener);
+            //mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            //mMediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.sneyl_audio);
+            //mMediaPlayer.setOnCompletionListener(mCompletionListener);
 
             if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
                 if (event.values[0] == 0) {

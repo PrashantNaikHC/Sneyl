@@ -3,4 +3,5 @@
     <string name="instructions">Place your phone on a sloping surface facing down, with top of the phone towards the downward direction. \n\n
         Phone will move due to the vibrations and should stop when it reaches the end of the surface.\n\n
     </string>
+    <string name="showcase">Keep the snail on the sloping ground, facing down.</string>
 </resources>
